@@ -16,6 +16,8 @@
     <dimen name="spacing_large">24dp</dimen>
 
     <dimen name="content_padding">16dp</dimen>
+    <dimen name="content_top_padding">8dp</dimen>
+    <dimen name="toolbar_height">44dp</dimen>
     <dimen name="island_padding">16dp</dimen>
     <dimen name="island_margin_bottom">10dp</dimen>
     <dimen name="card_content_padding">16dp</dimen>
