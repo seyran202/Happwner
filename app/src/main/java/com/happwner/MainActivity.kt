@@ -144,6 +144,30 @@ class MainActivity : AppCompatActivity() {
 
     private fun getSafePrefs(context: Context): SharedPreferences = PrefsManager.getSafePrefs(context)
 
+    /**
+     * Apple large-title behaviour: the inline navigation title is invisible while
+     * the large title is on screen and fades in as the content scrolls up.
+     */
+    private fun bindLargeTitleScroll(toolbar: androidx.appcompat.widget.Toolbar, scrollView: ScrollView) {
+        val baseColor = ContextCompat.getColor(this, R.color.toolbar_text)
+        val threshold = 44f * resources.displayMetrics.density
+        val apply = { scrollY: Int ->
+            val alpha = (scrollY / threshold).coerceIn(0f, 1f)
+            toolbar.setTitleTextColor(
+                Color.argb(
+                    (alpha * 255f).toInt(),
+                    Color.red(baseColor),
+                    Color.green(baseColor),
+                    Color.blue(baseColor)
+                )
+            )
+        }
+        apply(scrollView.scrollY)
+        scrollView.viewTreeObserver.addOnScrollChangedListener {
+            apply(scrollView.scrollY)
+        }
+    }
+
     // Can we read the system Monet palette? (Android 12+)
     private fun isMonetPaletteAvailable(): Boolean {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return false
@@ -218,11 +242,11 @@ class MainActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             statusBarColor = Color.TRANSPARENT
             @Suppress("DEPRECATION")
-            navigationBarColor = Color.TRANSPARENT
+            navigationBarColor = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) Color.BLACK else Color.TRANSPARENT
         }
         val isNightMode = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
         WindowInsetsControllerCompat(window, window.decorView).apply {
-            isAppearanceLightStatusBars = false
+            isAppearanceLightStatusBars = !isNightMode
             isAppearanceLightNavigationBars = !isNightMode
         }
 
@@ -242,9 +266,14 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        bindLargeTitleScroll(toolbar, findViewById(R.id.mainScrollView))
 
         mainContainer = findViewById(R.id.mainContainer)
         val statusBarBackground = findViewById<View>(R.id.statusBarBackground)
+        // Android 5.x has no dark status-bar icons, so keep a dark strip there.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            statusBarBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.apple_blue_pressed))
+        }
 
         // Insets for the system bars, plus auto-scroll to the focused field when the keyboard appears
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, insets ->
@@ -1128,7 +1157,7 @@ class MainActivity : AppCompatActivity() {
         val isNightMode = (newConfig.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
             android.content.res.Configuration.UI_MODE_NIGHT_YES
         WindowInsetsControllerCompat(window, window.decorView).apply {
-            isAppearanceLightStatusBars = false
+            isAppearanceLightStatusBars = !isNightMode
             isAppearanceLightNavigationBars = !isNightMode
         }
     }

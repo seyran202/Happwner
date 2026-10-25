@@ -8,4 +8,11 @@
     <attr name="happToolbarBg" format="color" />
     <attr name="happDialogStroke" format="color" />
     <attr name="happAccent" format="color" />
+
+    <!-- Apple / glassmorphism design tokens -->
+    <attr name="happMeshBg" format="reference" />
+    <attr name="happGlassBg" format="color" />
+    <attr name="happGlassBorder" format="color" />
+    <attr name="happGlassHighlight" format="color" />
+    <attr name="happGlassShadow" format="color" />
 </resources>

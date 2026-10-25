@@ -1,25 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-     <color name="brand_purple">#473A92</color>
-     <color name="brand_purple_secondary">#817AE6</color>
-     <color name="brand_purple_secondary_highlight">#668E85FF</color>
-     <color name="toolbar_ripple">#5F50B5</color>
+    <!-- Apple system palette (dark) -->
+    <color name="apple_blue">#0A84FF</color>
+    <color name="apple_blue_pressed">#409CFF</color>
+    <color name="apple_green">#30D158</color>
+    <color name="apple_red">#FF453A</color>
+    <color name="apple_orange">#FF9F0A</color>
+    <color name="apple_yellow">#FFD60A</color>
+    <color name="apple_purple">#BF5AF2</color>
+    <color name="apple_pink">#FF375F</color>
+    <color name="apple_teal">#64D2FF</color>
+    <color name="apple_indigo">#5E5CE6</color>
 
-    <color name="status_bar">#32286B</color>
+    <color name="brand_purple">@color/apple_blue</color>
+    <color name="brand_purple_secondary">@color/apple_blue</color>
+    <color name="brand_purple_secondary_highlight">#330A84FF</color>
+    <color name="toolbar_ripple">#330A84FF</color>
+    <color name="ripple_gray">#26FFFFFF</color>
 
-    <color name="app_background">#161616</color>
-    <color name="island_surface">#222222</color>
-    <color name="island_stroke">#383838</color>
-    <color name="dialog_background">#050505</color>
+    <color name="status_bar">#00000000</color>
 
-    <color name="text_primary">#C1C1C1</color>
-    <color name="text_secondary">#828282</color>
+    <color name="app_background">#000000</color>
+    <color name="island_surface">#991C1C1E</color>
+    <color name="island_stroke">#33FFFFFF</color>
+    <color name="surface_solid">#1C1C1E</color>
+    <color name="dialog_background">#E61C1C1E</color>
+
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#EBEBF599</color>
     <color name="text_disabled">#48484A</color>
-    <color name="toolbar_text">@color/text_primary</color>
-    <color name="btn_get_text">@color/text_primary</color>
-    <color name="error_red">#C84139</color>
+    <color name="toolbar_text">#FFFFFF</color>
+    <color name="btn_get_text">#FFFFFF</color>
+    <color name="error_red">#FF453A</color>
+    <color name="separator">#54545899</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="bridge_on">#30D158</color>
+    <color name="bridge_off">#8E8E93</color>
+
+    <!-- Glassmorphism tokens (dark) -->
+    <color name="glass_bg">#991C1C1E</color>
+    <color name="glass_bg_elevated">#B32C2C2E</color>
+    <color name="glass_border">#33FFFFFF</color>
+    <color name="glass_border_dim">#1AFFFFFF</color>
+    <color name="glass_highlight">#26FFFFFF</color>
+    <color name="glass_shadow">#66000000</color>
+    <color name="glass_accent_tint">#260A84FF</color>
+    <color name="nav_glass">#D91C1C1E</color>
+    <color name="glass_dialog_border">#33FFFFFF</color>
+
+    <color name="switch_track_off">#39393D</color>
+
+    <color name="apple_mesh_base">#000000</color>
 </resources>

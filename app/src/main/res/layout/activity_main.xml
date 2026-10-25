@@ -5,31 +5,35 @@
     android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/happScreenBg">
+    android:background="?attr/happMeshBg">
 
 <LinearLayout
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/happScreenBg"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <View
         android:id="@+id/statusBarBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/happStatusBarBg" />
+        android:background="@color/nav_glass" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/happToolbarBg"
+            android:background="@color/nav_glass"
+            android:elevation="0dp"
             app:title="@string/app_name"
+            app:titleTextAppearance="@style/TextAppearance.Happwner.NavTitle"
             app:titleTextColor="@color/toolbar_text"
             app:navigationIconTint="@color/toolbar_text"
             app:theme="@style/ThemeOverlay_Happwner_Toolbar">
@@ -48,6 +52,11 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hairline"
+        android:background="@color/separator" />
 
     <FrameLayout
         android:id="@+id/resultViewport"
@@ -68,21 +77,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/island_padding"
+            android:padding="@dimen/content_padding"
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="@dimen/spacing_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/TextAppearance.Happwner.LargeTitle" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/app_subtitle"
+                    android:textAppearance="@style/TextAppearance.Happwner.Footnote"
+                    android:lineSpacingExtra="1dp" />
+            </LinearLayout>
+
+            <com.happwner.GlassCardView
                 android:id="@+id/islandIntercept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
                 android:visibility="gone"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -109,9 +141,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/label_captured_urls"
-                            android:textColor="?attr/happAccent"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_section"
                             android:textStyle="bold"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.08" />
 
                         <ImageButton
                             android:id="@+id/btnClearHistory"
@@ -155,16 +189,15 @@
                             android:orientation="vertical" />
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -182,7 +215,7 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/layoutUrl"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/Widget_Happwner_TextInputLayout"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
@@ -255,7 +288,7 @@
                         android:layout_marginBottom="@dimen/island_margin_bottom">
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/layoutHwid"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/Widget_Happwner_TextInputLayout"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -307,7 +340,7 @@
                         android:layout_marginBottom="@dimen/spacing_normal">
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/layoutUserAgent"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            style="@style/Widget_Happwner_TextInputLayout"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -347,32 +380,30 @@
 
                         <Button
                             android:id="@+id/btnGet"
-                            style="@style/Widget.MaterialComponents.Button"
+                            style="@style/Widget.Happwner.Button.Primary"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:minHeight="48dp"
                             android:text="@string/btn_get_proxy"
-                            android:textColor="@color/btn_get_text"
-                            app:cornerRadius="@dimen/spacing_tiny"
+                            app:cornerRadius="@dimen/button_corner_radius"
                             android:layout_marginEnd="@dimen/spacing_small" />
 
                         <Button
                             android:id="@+id/btnGetSub"
-                            style="@style/Widget.MaterialComponents.Button"
+                            style="@style/Widget.Happwner.Button.Secondary"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:minHeight="48dp"
                             android:text="@string/btn_get_sub"
-                            android:textColor="@color/btn_get_text"
-                            app:cornerRadius="@dimen/spacing_tiny" />
+                            app:cornerRadius="@dimen/button_corner_radius" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="?attr/happCardStroke"
+                        android:background="@color/separator"
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="8dp" />
 
@@ -393,9 +424,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/label_result"
-                            android:textColor="?attr/happAccent"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_size_section"
                             android:textStyle="bold"
-                            android:textAllCaps="true" />
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.08" />
 
                         <ImageButton
                             android:id="@+id/btnClearOutput"
@@ -438,7 +471,7 @@
                         tools:ignore="UnusedAttribute" />
 
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
         </LinearLayout>
     </com.happwner.NoAutoScrollView>
@@ -467,7 +500,7 @@
         android:id="@+id/settingsFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/happScreenBg"
+        android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone" />

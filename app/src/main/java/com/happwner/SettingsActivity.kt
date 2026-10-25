@@ -74,11 +74,11 @@ class SettingsActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             statusBarColor = Color.TRANSPARENT
             @Suppress("DEPRECATION")
-            navigationBarColor = Color.TRANSPARENT
+            navigationBarColor = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) Color.BLACK else Color.TRANSPARENT
         }
         val isNightMode = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
         WindowInsetsControllerCompat(window, window.decorView).apply {
-            isAppearanceLightStatusBars = false
+            isAppearanceLightStatusBars = !isNightMode
             isAppearanceLightNavigationBars = !isNightMode
         }
 

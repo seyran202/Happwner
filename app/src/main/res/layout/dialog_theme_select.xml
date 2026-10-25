@@ -62,7 +62,7 @@
         android:layout_marginEnd="@dimen/dialog_message_padding"
         android:layout_marginTop="@dimen/spacing_tiny"
         android:layout_marginBottom="@dimen/spacing_tiny"
-        android:background="?attr/happCardStroke"
+        android:background="@color/separator"
         android:visibility="gone" />
 
     <RadioGroup

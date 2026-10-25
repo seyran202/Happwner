@@ -5,26 +5,30 @@
     android:id="@+id/settingsRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/happScreenBg"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
     <View
         android:id="@+id/settingsStatusBarBackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/happStatusBarBg" />
+        android:background="@color/nav_glass" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/settingsAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/happToolbarBg"
+            android:background="@color/nav_glass"
+            android:elevation="0dp"
             app:titleTextColor="@color/toolbar_text"
+            app:titleTextAppearance="@style/TextAppearance.Happwner.NavTitle"
             app:theme="@style/ThemeOverlay_Happwner_Toolbar"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp">
@@ -46,13 +50,14 @@
                     app:tint="@color/toolbar_text" />
 
                 <TextView
+                    android:id="@+id/settingsTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="16dp"
                     android:text="@string/title_settings"
                     android:textColor="@color/toolbar_text"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+                    android:textAppearance="@style/TextAppearance.Happwner.NavTitle" />
 
                 <ImageButton
                     android:id="@+id/action_info"
@@ -69,6 +74,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hairline"
+        android:background="@color/separator" />
+
     <ScrollView
         android:id="@+id/settingsScrollView"
         android:layout_width="match_parent"
@@ -81,30 +91,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/island_padding">
+            android:padding="@dimen/content_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="@dimen/spacing_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_settings"
+                    android:textAppearance="@style/TextAppearance.Happwner.LargeTitle" />
+            </LinearLayout>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/setting_header_appearance"
-                android:textColor="?attr/happAccent"
-                android:textSize="@dimen/text_size_secondary"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_size_section"
                 android:textStyle="bold"
                 android:textAllCaps="true"
+                android:letterSpacing="0.08"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
                 android:layout_marginStart="@dimen/spacing_tiny" />
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -149,18 +175,17 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,18 +230,17 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemAnimations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -261,7 +285,7 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
 
 
@@ -279,10 +303,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_bridge_header"
-                    android:textColor="?attr/happAccent"
-                    android:textSize="@dimen/text_size_secondary"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_size_section"
                     android:textStyle="bold"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08" />
 
                 <ImageView
                     android:id="@+id/iconBridgeInstruction"
@@ -299,16 +324,15 @@
                     app:tint="?attr/happAccent" />
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemEnableBridge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -355,18 +379,17 @@
                         android:focusable="false"
                         android:background="@null" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemBatteryOpt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -420,18 +443,17 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemWatchdog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -478,7 +500,7 @@
                         android:focusable="false"
                         android:background="@null" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
 
             <LinearLayout
@@ -494,10 +516,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_header_response"
-                    android:textColor="?attr/happAccent"
-                    android:textSize="@dimen/text_size_secondary"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_size_section"
                     android:textStyle="bold"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.08" />
 
                 <ImageView
                     android:id="@+id/iconResponseInfo"
@@ -514,16 +537,15 @@
                     app:tint="?attr/happAccent" />
             </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemProcessB64"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -569,18 +591,17 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemProcessXray"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -634,18 +655,17 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         app:tint="?attr/happAccent" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.happwner.GlassCardView
                 android:id="@+id/itemProcessResponse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/island_margin_bottom"
-                app:cardCornerRadius="@dimen/ui_corner_radius"
-                app:cardElevation="0dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/happCardStroke"
-                app:cardBackgroundColor="?attr/happCardBg">
+                app:cardCornerRadius="@dimen/glass_corner_radius"
+                app:cardElevation="@dimen/glass_shadow_elevation"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -691,7 +711,7 @@
                         android:src="@drawable/ic_expand_more"
                         app:tint="@color/text_secondary" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </com.happwner.GlassCardView>
             <LinearLayout
                 android:id="@+id/xposedSection"
                 android:layout_width="match_parent"
@@ -703,24 +723,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/setting_header_xposed"
-                    android:textColor="?attr/happAccent"
-                    android:textSize="@dimen/text_size_secondary"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_size_section"
                     android:textStyle="bold"
                     android:textAllCaps="true"
+                    android:letterSpacing="0.08"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:layout_marginBottom="@dimen/island_margin_bottom"
                     android:layout_marginStart="@dimen/spacing_tiny" />
 
-                <com.google.android.material.card.MaterialCardView
+                <com.happwner.GlassCardView
                     android:id="@+id/itemHwidSpoof"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/island_margin_bottom"
-                    app:cardCornerRadius="@dimen/ui_corner_radius"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="?attr/happCardStroke"
-                    app:cardBackgroundColor="?attr/happCardBg">
+                    app:cardCornerRadius="@dimen/glass_corner_radius"
+                    app:cardElevation="@dimen/glass_shadow_elevation"
+                    app:strokeWidth="0dp"
+                                        app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:id="@+id/rowHwidSpoofToggle"
@@ -779,19 +799,18 @@
                             android:focusable="false"
                             android:background="@null" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </com.happwner.GlassCardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <com.happwner.GlassCardView
                     android:id="@+id/itemUnlock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/island_margin_bottom"
                     android:visibility="gone"
-                    app:cardCornerRadius="@dimen/ui_corner_radius"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="?attr/happCardStroke"
-                    app:cardBackgroundColor="?attr/happCardBg">
+                    app:cardCornerRadius="@dimen/glass_corner_radius"
+                    app:cardElevation="@dimen/glass_shadow_elevation"
+                    app:strokeWidth="0dp"
+                                        app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -839,18 +858,17 @@
                             android:focusable="false"
                             android:background="@null" />
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </com.happwner.GlassCardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <com.happwner.GlassCardView
                     android:id="@+id/itemInterceptLinks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/island_margin_bottom"
-                    app:cardCornerRadius="@dimen/ui_corner_radius"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="?attr/happCardStroke"
-                    app:cardBackgroundColor="?attr/happCardBg">
+                    app:cardCornerRadius="@dimen/glass_corner_radius"
+                    app:cardElevation="@dimen/glass_shadow_elevation"
+                    app:strokeWidth="0dp"
+                                        app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -898,18 +916,17 @@
                             android:background="@null" />
 
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </com.happwner.GlassCardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <com.happwner.GlassCardView
                     android:id="@+id/itemShowDuplicates"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/island_margin_bottom"
-                    app:cardCornerRadius="@dimen/ui_corner_radius"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="?attr/happCardStroke"
-                    app:cardBackgroundColor="?attr/happCardBg">
+                    app:cardCornerRadius="@dimen/glass_corner_radius"
+                    app:cardElevation="@dimen/glass_shadow_elevation"
+                    app:strokeWidth="0dp"
+                                        app:cardBackgroundColor="@android:color/transparent">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -957,7 +974,7 @@
                             android:background="@null" />
 
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                </com.happwner.GlassCardView>
 
             </LinearLayout>
 

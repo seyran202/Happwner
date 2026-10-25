@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Happwner</string>
     <string name="title_settings">Settings</string>
+    <string name="app_subtitle">Encrypted links and subscriptions, beautifully simple</string>
     <string name="xposed_desc">A comprehensive solution to decrypt and export proxy subscriptions to any apps</string>
 
     <string name="label_captured_urls">Captured links</string>

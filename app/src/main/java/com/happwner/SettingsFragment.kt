@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.PathInterpolator
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -92,6 +93,7 @@ class SettingsFragment : Fragment() {
 
         bindInsets(view)
         bindToolbar(view)
+        bindLargeTitleScroll(view)
         bindLanguageItem(view)
         bindThemeItem(view)
         bindAnimationsItem(view)
@@ -292,6 +294,11 @@ class SettingsFragment : Fragment() {
     // Insets for the system bars, plus auto-scroll to the field when the keyboard appears
     private fun bindInsets(view: View) {
         val statusBarBackground = view.findViewById<View>(R.id.settingsStatusBarBackground)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            statusBarBackground.setBackgroundColor(
+                androidx.core.content.ContextCompat.getColor(view.context, R.color.apple_blue_pressed)
+            )
+        }
         val settingsScrollView = view.findViewById<android.widget.ScrollView>(R.id.settingsScrollView)
         val toolbar = view.findViewById<View>(R.id.settingsToolbar)
         ViewCompat.setOnApplyWindowInsetsListener(view) { _, insets ->
@@ -325,6 +332,20 @@ class SettingsFragment : Fragment() {
             insets
         }
         ViewCompat.requestApplyInsets(view)
+    }
+
+    // Apple large-title behaviour for the settings list
+    private fun bindLargeTitleScroll(view: View) {
+        val scrollView = view.findViewById<ScrollView>(R.id.settingsScrollView) ?: return
+        val title = view.findViewById<TextView>(R.id.settingsTitle) ?: return
+        val threshold = 44f * resources.displayMetrics.density
+        val apply = { scrollY: Int ->
+            title.alpha = (scrollY / threshold).coerceIn(0f, 1f)
+        }
+        apply(scrollView.scrollY)
+        scrollView.viewTreeObserver.addOnScrollChangedListener {
+            apply(scrollView.scrollY)
+        }
     }
 
     private fun bindToolbar(view: View) {

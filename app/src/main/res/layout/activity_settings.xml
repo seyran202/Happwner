@@ -3,4 +3,4 @@
     android:id="@+id/settingsActivityRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/happScreenBg" />
+    android:background="?attr/happMeshBg" />
