@@ -40,7 +40,7 @@ private const val SETTINGS_OPEN_MS = 220L
 private const val SETTINGS_CLOSE_MS = 180L
 private const val MAIN_SLIDE_FRACTION = 0.10f
 private const val SETTINGS_SLIDE_FRACTION = 0.33f
-private const val SETTINGS_FADE_START = 0.7f
+private const val SETTINGS_FADE_START = 1f
 
 private const val LOWRAM_DIALOG_MS = 120L
 private const val LOWRAM_ACTIVITY_MS = 100L
