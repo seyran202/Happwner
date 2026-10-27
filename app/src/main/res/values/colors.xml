@@ -61,4 +61,9 @@
     <color name="switch_track_off">#E9E9EB</color>
 
     <color name="apple_mesh_base">#F2F2F7</color>
+
+    <!-- Glass segment bar -->
+    <color name="segment_pill_start">#3D0A84FF</color>
+    <color name="segment_pill_end">#140A84FF</color>
+    <color name="segment_pill_stroke">#590A84FF</color>
 </resources>

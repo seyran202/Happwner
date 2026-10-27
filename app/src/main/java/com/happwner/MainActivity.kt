@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     private var blockOutputTouch = false
     private var outputExpandAborted = false
     private var expandJob: kotlinx.coroutines.Job? = null
-    private lateinit var btnGetSub: Button
+    private lateinit var actionSegments: SegmentedGlassBar
     private lateinit var btnPasteUrlManual: ImageButton
 
     private var fullResponseText: String = ""
@@ -356,9 +356,8 @@ class MainActivity : AppCompatActivity() {
         // Swallow touches on the result only while the wait label is shown, so the invisible text can't be selected
         output.setOnTouchListener { _, _ -> blockOutputTouch }
         (findViewById<View>(R.id.mainScrollView) as? NoAutoScrollView)?.selectionView = output
-        btnGetSub = findViewById(R.id.btnGetSub)
+        actionSegments = findViewById(R.id.actionSegments)
         btnPasteUrlManual = findViewById(R.id.btnPasteUrlManual)
-        val button = findViewById<Button>(R.id.btnGet)
         hwidHint = findViewById(R.id.hwidHint)
 
         islandIntercept = findViewById(R.id.islandIntercept)
@@ -603,8 +602,9 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.getColor(this, R.color.brand_purple_secondary)
         ))
 
-        // "Get subscription" button: copies the bridge URL (enabling the bridge if needed)
-        btnGetSub.setOnClickListener {
+        // "Get subscription" segment: copies the bridge URL (enabling the bridge if needed)
+        findViewById<View>(R.id.segmentSubscription).setOnClickListener {
+            actionSegments.select(SegmentedGlassBar.Segment.SUBSCRIPTION, true)
             val nowMs = android.os.SystemClock.elapsedRealtime()
             if (nowMs - lastGetSubTapMs < 500) return@setOnClickListener
             lastGetSubTapMs = nowMs
@@ -668,9 +668,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             val showCopiedAction = {
-                btnGetSub.text = getString(R.string.btn_copied)
-                btnGetSub.postDelayed({
-                    btnGetSub.text = getString(R.string.btn_get_sub)
+                actionSegments.setSubscriptionLabel(getString(R.string.btn_copied))
+                actionSegments.postDelayed({
+                    actionSegments.setSubscriptionLabel(getString(R.string.btn_get_sub))
                 }, 1000)
             }
 
@@ -722,7 +722,8 @@ class MainActivity : AppCompatActivity() {
         infoHwid.setOnClickListener { showInfoDialog(getString(R.string.info_hwid_title), getString(R.string.info_hwid_msg)) }
         infoUserAgent.setOnClickListener { showInfoDialog(getString(R.string.info_ua_title), getString(R.string.info_ua_msg)) }
 
-        button.setOnClickListener {
+        findViewById<View>(R.id.segmentProfiles).setOnClickListener {
+            actionSegments.select(SegmentedGlassBar.Segment.PROFILES, true)
             val nowMs = android.os.SystemClock.elapsedRealtime()
             // Fetch button: pull the subscription directly, decrypt/convert, then show the result
             if (nowMs - lastFetchTapMs < 500) return@setOnClickListener
@@ -2005,7 +2006,7 @@ class MainActivity : AppCompatActivity() {
             .setView(dialogView)
             .setPositiveButton(fromHtml(getString(R.string.btn_ok))) { _, _ ->
                 getSafePrefs(this).edit().putBoolean("bridge_hint_shown", true).apply()
-                btnGetSub.performClick()
+                findViewById<View>(R.id.segmentSubscription).performClick()
             }
             .showAnimated()
 
